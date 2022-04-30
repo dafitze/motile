@@ -196,93 +196,98 @@ Float location_height = location_row.getFloat("height");
 
 //// ----------------------------- DRAW CONTENT ----
 //// {{{============================================
-// chapter title
-textFont(font_mono);
-textSize(chapter_text_size);
-textAlign(LEFT, TOP);
-fill(chapter_color);
-text("Title",
-    x_coord_title + title_offset,    // x text start
-    y_coord_title + title_offset,    // y text start
-    box_width - 2*title_offset,           // width text box
-    box_height - 2*title_offset);         // height text box
+if (size_title != 0){
+  // chapter title
+  textFont(font_mono);
+  textSize(chapter_text_size);
+  textAlign(LEFT, TOP);
+  fill(chapter_color);
+  text("Title",
+      x_coord_title + title_offset,    // x text start
+      y_coord_title + title_offset,    // y text start
+      box_width - 2*title_offset,           // width text box
+      box_height - 2*title_offset);         // height text box
 
- //
-// title
-textFont(font_times);
-textSize(title_text_size);
-textAlign(LEFT, TOP);
-fill(title_color);
-text(title,
-    x_coord_title + title_offset,     // x text start
-    y_coord_title + 2 * title_offset, // y text start
-    title_width - 2*title_offset,     // width text box
-    title_height - 2*title_offset);   // height text box
-
- // Text
-fill(text_color);
-textFont(font_times);
-textSize(text_text_size);
-textAlign(LEFT, TOP);
-text(text,
-    x_coord_text + title_offset,
-    y_coord_text + title_offset,
-    text_width - 2 * title_offset,
-    text_height - 2 * title_offset);
+  //
+  // title
+  textFont(font_times);
+  textSize(title_text_size);
+  textAlign(LEFT, TOP);
+  fill(title_color);
+  text(title,
+      x_coord_title + title_offset,     // x text start
+      y_coord_title + 2 * title_offset, // y text start
+      title_width - 2*title_offset,     // width text box
+      title_height - 2*title_offset);   // height text box
+}
+// Text
+if (size_text != 0){
+  fill(text_color);
+  textFont(font_times);
+  textSize(text_text_size);
+  textAlign(LEFT, TOP);
+  text(text,
+      x_coord_text + title_offset,
+      y_coord_text + title_offset,
+      text_width - 2 * title_offset,
+      text_height - 2 * title_offset);
+}
 
 // img
-img.resize(round(img_width), 0);
-PImage IMG = img.get(
-    0,   // x coord
-    0,   // y coord
-    round(img_width),
-    round(img_height));
+if (size_img != 0){
+  img.resize(round(img_width), 0);
+  PImage IMG = img.get(
+      0,   // x coord
+      0,   // y coord
+      round(img_width),
+      round(img_height));
 
 
-image(IMG,
-    x_coord_img + 2,
-    y_coord_img + 2);
-//,
-  //  img_width - 4,
-    //img_height -4);
+  image(IMG,
+      x_coord_img + 2,
+      y_coord_img + 2);
+}
 
-// chapter date
-textFont(font_mono);
-textSize(chapter_text_size);
-textAlign(LEFT, BOTTOM);
-fill(chapter_color);
-text(date,
-    x_coord_date + title_offset,  // x text start
-    y_coord_date + title_offset,  // y text start
-    box_width - 2*title_offset,       // width text box
-    box_height - 4*title_offset);     // height text box
-// DATE
-textFont(font_times);
-textSize(chapter_text_size);
-text(DATE,
-    x_coord_date + title_offset,  // x text start
-    y_coord_date + title_offset,  // y text start
-    date_width - 2 * title_offset,       // width text box
-    date_height - 2 * title_offset);     // height text box
-
-// chapter location
-textFont(font_mono);
-textSize(chapter_text_size);
-textAlign(LEFT, BOTTOM);
-fill(chapter_color);
-text(location,
-    x_coord_location + title_offset,  // x text start
-    y_coord_location + title_offset,  // y text start
-    box_width - 2*title_offset,       // width text box
-    box_height - 4*title_offset);     // height text box
-// LOCATION
-textFont(font_times);
-textSize(chapter_text_size);
-text(LOCATION,
-    x_coord_location + title_offset,  // x text start
-    y_coord_location + title_offset,  // y text start
-    location_width - 2*title_offset,       // width text box
-    location_height - 2*title_offset);     // height text box
+if (size_date != 0){
+  // chapter date
+  textFont(font_mono);
+  textSize(chapter_text_size);
+  textAlign(LEFT, BOTTOM);
+  fill(chapter_color);
+  text(date,
+      x_coord_date + title_offset,  // x text start
+      y_coord_date + title_offset,  // y text start
+      box_width - 2*title_offset,       // width text box
+      box_height - 4*title_offset);     // height text box
+  // DATE
+  textFont(font_times);
+  textSize(chapter_text_size);
+  text(DATE,
+      x_coord_date + title_offset,  // x text start
+      y_coord_date + title_offset,  // y text start
+      date_width - 2 * title_offset,       // width text box
+      date_height - 2 * title_offset);     // height text box
+}
+if (size_location != 0){
+  // chapter location
+  textFont(font_mono);
+  textSize(chapter_text_size);
+  textAlign(LEFT, BOTTOM);
+  fill(chapter_color);
+  text(location,
+      x_coord_location + title_offset,  // x text start
+      y_coord_location + title_offset,  // y text start
+      box_width - 2*title_offset,       // width text box
+      box_height - 4*title_offset);     // height text box
+  // LOCATION
+  textFont(font_times);
+  textSize(chapter_text_size);
+  text(LOCATION,
+      x_coord_location + title_offset,  // x text start
+      y_coord_location + title_offset,  // y text start
+      location_width - 2*title_offset,       // width text box
+      location_height - 2*title_offset);     // height text box
+}
 // }}}
 
 // -------------------------------- DRAW GRID ----
@@ -293,186 +298,194 @@ strokeWeight(4);
 
 // outer box
 line(left_border, border,
-     left_border, height - border);
+    left_border, height - border);
 line(width - border, border,
-     width - border, height - border);
+    width - border, height - border);
 line(left_border, border,
-     width - border, border);
+    width - border, border);
 line(left_border, height - border,
-     width - border, height - border);
+    width - border, height - border);
 
 int horizontal_length = 99;
 int vertical_height = 99;
 int vertical_length = 99;
 int vertical_pos = 99;
+if (size_title != 0){
+  // title border
+  if (size_title == 4) {
+    horizontal_length = 2; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if (size_title == 3){
+    horizontal_length = 2; // width of border
+    vertical_length = 1;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if ((size_title == 2) && (box_title % 2 == 0)){
+    horizontal_length = 1; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 1;      // is line in center required
+  } else if ((size_title == 2) && (box_title % 2 != 0)){
+    horizontal_length = 1;
+    vertical_length = 2;
+    vertical_pos = 0;
+  } else if ((size_title == 1) && (box_title % 2 == 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 1;
+  } else if ((size_title == 1) && (box_title % 2 != 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 0;
+  };
 
-// title border
-if (size_title == 4) {
-  horizontal_length = 2; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if (size_title == 3){
-  horizontal_length = 2; // width of border
-  vertical_length = 1;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if ((size_title == 2) && (box_title % 2 == 0)){
-  horizontal_length = 1; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 1;      // is line in center required
-} else if ((size_title == 2) && (box_title % 2 != 0)){
-  horizontal_length = 1;
-  vertical_length = 2;
-  vertical_pos = 0;
-} else if ((size_title == 1) && (box_title % 2 == 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 1;
-} else if ((size_title == 1) && (box_title % 2 != 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 0;
-};
+  // horizontal upper line
+  line(x_coord_title,                                // x1 
+      y_coord_title,                                 // y1
+      x_coord_title + horizontal_length * box_width, // x2
+      y_coord_title);                                // y2
+  // hotizontal lower line
+  line(x_coord_title,                                // x1
+      y_coord_title + vertical_length * box_height,  // y1
+      x_coord_title + horizontal_length * box_width, // x2
+      y_coord_title + vertical_length * box_height); // y2
+  // vertical line
+  line(x_coord_title + vertical_pos * box_width,     // x1 
+      y_coord_title,                                 // y1
+      x_coord_title + vertical_pos * box_width,      // x2
+      y_coord_title + vertical_length * box_height); // y2
+}
 
-// horizontal upper line
-line(x_coord_title,                                // x1 
-    y_coord_title,                                 // y1
-    x_coord_title + horizontal_length * box_width, // x2
-    y_coord_title);                                // y2
-// hotizontal lower line
-line(x_coord_title,                                // x1
-    y_coord_title + vertical_length * box_height,  // y1
-    x_coord_title + horizontal_length * box_width, // x2
-    y_coord_title + vertical_length * box_height); // y2
-// vertical line
-line(x_coord_title + vertical_pos * box_width,     // x1 
-    y_coord_title,                                 // y1
-    x_coord_title + vertical_pos * box_width,      // x2
-    y_coord_title + vertical_length * box_height); // y2
+if (size_text !=0){
+  // text border
+  if (size_text == 4) {
+    horizontal_length = 2; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if (size_text == 3){
+    horizontal_length = 2; // width of border
+    vertical_length = 1;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if ((size_text == 2) && (box_text % 2 != 0)){
+    horizontal_length = 1; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 1;      // is line in center required
+  } else if ((size_text == 2) && (box_text % 2 == 0)){
+    horizontal_length = 1;
+    vertical_length = 2;
+    vertical_pos = 0;
+  } else if ((size_text == 1) && (box_text % 2 != 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 1;
+  } else if ((size_text == 1) && (box_text % 2 == 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 0;
+  };
 
+  // horizontal upper line
+  line(x_coord_text,                                // x1 
+      y_coord_text,                                 // y1
+      x_coord_text + horizontal_length * box_width, // x2
+      y_coord_text);                                // y2
+  // hotizontal lower line
+  line(x_coord_text,
+      y_coord_text + vertical_length * box_height,  // y1
+      x_coord_text + horizontal_length * box_width, // x2
+      y_coord_text + vertical_length * box_height); // y2
 
-// text border
-if (size_text == 4) {
-  horizontal_length = 2; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if (size_text == 3){
-  horizontal_length = 2; // width of border
-  vertical_length = 1;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if ((size_text == 2) && (box_text % 2 != 0)){
-  horizontal_length = 1; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 1;      // is line in center required
-} else if ((size_text == 2) && (box_text % 2 == 0)){
-  horizontal_length = 1;
-  vertical_length = 2;
-  vertical_pos = 0;
-} else if ((size_text == 1) && (box_text % 2 != 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 1;
-} else if ((size_text == 1) && (box_text % 2 == 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 0;
-};
+  // vertical line
+  line(x_coord_text + vertical_pos * box_width,     // x1 
+      y_coord_text,                                 // y1
+      x_coord_text + vertical_pos * box_width,      // x2
+      y_coord_text + vertical_length * box_height); // y2
+}
 
-// horizontal upper line
-line(x_coord_text,                                // x1 
-    y_coord_text,                                 // y1
-    x_coord_text + horizontal_length * box_width, // x2
-    y_coord_text);                                // y2
-// hotizontal lower line
-line(x_coord_text,
-    y_coord_text + vertical_length * box_height,  // y1
-    x_coord_text + horizontal_length * box_width, // x2
-    y_coord_text + vertical_length * box_height); // y2
+if (size_img != 0){
+  // img border
+  if (size_img == 4) {
+    horizontal_length = 2; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if (size_img == 3){
+    horizontal_length = 2; // width of border
+    vertical_length = 1;   // height of border
+    vertical_pos = 0;      // is line in center required
+  } else if ((size_img == 2) && (box_img % 2 != 0)){
+    horizontal_length = 1; // width of border
+    vertical_length = 2;   // height of border
+    vertical_pos = 1;      // is line in center required
+  } else if ((size_img == 2) && (box_img % 2 == 0)){
+    horizontal_length = 1;
+    vertical_length = 2;
+    vertical_pos = 0;
+  } else if ((size_img == 1) && (box_img % 2 != 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 1;
+  } else if ((size_img == 1) && (box_img % 2 == 0)) {
+    horizontal_length = 1;
+    vertical_length = 1;
+    vertical_pos = 0;
+  };
 
-// vertical line
-line(x_coord_text + vertical_pos * box_width,     // x1 
-    y_coord_text,                                 // y1
-    x_coord_text + vertical_pos * box_width,      // x2
-    y_coord_text + vertical_length * box_height); // y2
+  // horizontal upper line
+  line(x_coord_img,                                // x1 
+      y_coord_img,                                 // y1
+      x_coord_img + horizontal_length * box_width, // x2
+      y_coord_img);                                // y2
+  // hotizontal lower line
+  line(x_coord_img,
+      y_coord_img + vertical_length * box_height,  // y1
+      x_coord_img + horizontal_length * box_width, // x2
+      y_coord_img + vertical_length * box_height); // y2
 
-// img border
-if (size_img == 4) {
-  horizontal_length = 2; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if (size_img == 3){
-  horizontal_length = 2; // width of border
-  vertical_length = 1;   // height of border
-  vertical_pos = 0;      // is line in center required
-} else if ((size_img == 2) && (box_img % 2 != 0)){
-  horizontal_length = 1; // width of border
-  vertical_length = 2;   // height of border
-  vertical_pos = 1;      // is line in center required
-} else if ((size_img == 2) && (box_img % 2 == 0)){
-  horizontal_length = 1;
-  vertical_length = 2;
-  vertical_pos = 0;
-} else if ((size_img == 1) && (box_img % 2 != 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 1;
-} else if ((size_img == 1) && (box_img % 2 == 0)) {
-  horizontal_length = 1;
-  vertical_length = 1;
-  vertical_pos = 0;
-};
+  // vertical line
+  line(x_coord_img + vertical_pos * box_width,     // x1 
+      y_coord_img,                                 // y1
+      x_coord_img + vertical_pos * box_width,      // x2
+      y_coord_img + vertical_length * box_height); // y2
+}
 
-// horizontal upper line
-line(x_coord_img,                                // x1 
-    y_coord_img,                                 // y1
-    x_coord_img + horizontal_length * box_width, // x2
-    y_coord_img);                                // y2
-// hotizontal lower line
-line(x_coord_img,
-    y_coord_img + vertical_length * box_height,  // y1
-    x_coord_img + horizontal_length * box_width, // x2
-    y_coord_img + vertical_length * box_height); // y2
+if (size_date != 0){
+  // border date
+  // horizontal upper line
+  line(x_coord_date,                                // x1 
+      y_coord_date,                                 // y1
+      x_coord_date + box_width, // x2
+      y_coord_date);                                // y2
+  // hotizontal lower line
+  line(x_coord_date,
+      y_coord_date + box_height,  // y1
+      x_coord_date + box_width, // x2
+      y_coord_date + box_height); // y2
 
-// vertical line
-line(x_coord_img + vertical_pos * box_width,     // x1 
-    y_coord_img,                                 // y1
-    x_coord_img + vertical_pos * box_width,      // x2
-    y_coord_img + vertical_length * box_height); // y2
+  // vertical line
+  line(x_coord_date + box_width,     // x1 
+      y_coord_date,                                 // y1
+      x_coord_date + box_width,      // x2
+      y_coord_date + box_height); // y2
+}
 
-// border date
-// horizontal upper line
-line(x_coord_date,                                // x1 
-    y_coord_date,                                 // y1
-    x_coord_date + box_width, // x2
-    y_coord_date);                                // y2
-// hotizontal lower line
-line(x_coord_date,
-    y_coord_date + box_height,  // y1
-    x_coord_date + box_width, // x2
-    y_coord_date + box_height); // y2
+if (size_location != 0){
+  // border location
+  // horizontal upper line
+  line(x_coord_location,                                // x1 
+      y_coord_location,                                 // y1
+      x_coord_location + box_width, // x2
+      y_coord_location);                                // y2
+  // hotizontal lower line
+  line(x_coord_location,
+      y_coord_location + box_height,  // y1
+      x_coord_location + box_width, // x2
+      y_coord_location + box_height); // y2
 
-// vertical line
-line(x_coord_date + box_width,     // x1 
-    y_coord_date,                                 // y1
-    x_coord_date + box_width,      // x2
-    y_coord_date + box_height); // y2
-
-// border location
-// horizontal upper line
-line(x_coord_location,                                // x1 
-    y_coord_location,                                 // y1
-    x_coord_location + box_width, // x2
-    y_coord_location);                                // y2
-// hotizontal lower line
-line(x_coord_location,
-    y_coord_location + box_height,  // y1
-    x_coord_location + box_width, // x2
-    y_coord_location + box_height); // y2
-
-// vertical line
-line(x_coord_location + box_width,     // x1 
-    y_coord_location,                                 // y1
-    x_coord_location + box_width,      // x2
-    y_coord_location + box_height); // y2
+  // vertical line
+  line(x_coord_location + box_width,     // x1 
+      y_coord_location,                                 // y1
+      x_coord_location + box_width,      // x2
+      y_coord_location + box_height); // y2
+}
 
 // border empty boxes
 if (EMPTY_BOXES[0] != 0){
@@ -566,19 +579,19 @@ float y_coord_badge = random(border + badge_radius, height - (border + badge_rad
 
 rand = (int)random(2);
 //if (rand == 1){
-  fill(badge_color);
-  ellipse(
-      x_coord_badge,
-      y_coord_badge,
-      badge_radius,
-      badge_radius);
-  fill(badge_text_color);
-  textAlign(CENTER, CENTER);
-  textFont(font_mono);  
-  textSize(chapter_text_size);
-  text(badge_text,
-      x_coord_badge,
-      y_coord_badge);
+fill(badge_color);
+ellipse(
+    x_coord_badge,
+    y_coord_badge,
+    badge_radius,
+    badge_radius);
+fill(badge_text_color);
+textAlign(CENTER, CENTER);
+textFont(font_mono);  
+textSize(chapter_text_size);
+text(badge_text,
+    x_coord_badge,
+    y_coord_badge);
 //}
 // }}}
 
