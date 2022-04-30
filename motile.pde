@@ -62,6 +62,8 @@ int[] EMPTY_BOXES = int(empty_boxes.split("; "));
 String path_img = value_row.getString("path_img");
 String path_title = value_row.getString("path_title");
 String path_text = value_row.getString("path_text");
+String shape_string = value_row.getString("shape");
+float[] shape_param = float(shape_string.split("; "));
 
 Table grid = loadTable("data/INFO/grid.csv", "header");
 // }}}
@@ -113,13 +115,6 @@ int text_color = 0;
 int chapter_text_size = 44;
 int chapter_color = 0;
 
-// badge
-int badge_color = 0;
-int badge_text_color = 255;
-int badge_radius = box_height;
-float badge_x = random(left_border + badge_radius, width - (border + badge_radius));
-float badge_y = random(border + badge_radius, height - (border + badge_radius));
-
  //
 
 // }}}
@@ -127,7 +122,10 @@ float badge_y = random(border + badge_radius, height - (border + badge_radius));
 // ------------------------------- BACKGROUND ----
 // {{{============================================
 background(255);
-fill(random(255), random(255), random(255));
+color[] colors = { #9bcd82, #fae682, #fa9650, #91c3eb, #fac37d, #eb96af, #50a07d, #fac314, #eb5a28, #3264af, #e19100, #e66478 };
+rand = (int)random(colors.length);
+color col = colors[rand];
+fill(col);
 rect(left_border, border, 2 * box_width, 6 * box_height);
 // }}}
 
@@ -508,27 +506,80 @@ if (EMPTY_BOXES[0] != 0){
   }
 }
 // }}}
+// ------------------------------- DRAW SHAPE ----
+// {{{============================================
+//rand = (int)random(6);
+rand = 5;
+fill(col);
+stroke(0);
+strokeWeight(4);
+ellipse(
+    left_border + shape_param[0],
+    border + shape_param[1],
+    shape_param[2] * 2 * box_width - 40,
+    shape_param[3] * 2 * box_height - 40);
+
+//// shape same size as img
+//if (rand == 1){
+//  ellipse(
+//      x_coord_img + 0.5 * img_width,
+//      y_coord_img + 0.5 * img_height,
+//      img_width - 40,
+//      img_height- 40);
+//  //shape half size as img
+//} else if (rand == 2){
+//  ellipse(
+//      x_coord_img + 0.25 * img_width,
+//      y_coord_img + 0.25 * img_height,
+//      img_width - 40,
+//      img_height- 40);
+//} else if (rand == 3){
+//  ellipse(
+//      x_coord_img + 0.75 * img_width,
+//      y_coord_img + 0.75 * img_height,
+//      img_width - 40,
+//      img_height- 40);
+//} else if (rand == 4){
+//  ellipse(
+//      left_border + box_width,
+//      border + 1.5 * box_height,
+//      box_width * 2 - 40,
+//      box_height * 3 - 40);
+//} else if (rand == 5){
+//  ellipse(
+//      left_border + box_width,
+//      height - border - 1.5 * box_height,
+//      box_width * 2 - 40,
+//      box_height * 3 - 40);
+//}
+
+
+// }}}
 
 // ------------------------------- DRAW BADGE ----
 // {{{============================================
+int badge_color = 0;
+int badge_text_color = 255;
+int badge_radius = box_height;
+float x_coord_badge = random(left_border + badge_radius, width - (border + badge_radius));
+float y_coord_badge = random(border + badge_radius, height - (border + badge_radius));
+
 rand = (int)random(2);
-println(rand);
-if (rand == 1){
+//if (rand == 1){
   fill(badge_color);
   ellipse(
-      x_coord_img + 0.5 * box_width,
-      y_coord_img + 0.5 * box_height,
-      img_width,
-      img_height);
-
+      x_coord_badge,
+      y_coord_badge,
+      badge_radius,
+      badge_radius);
   fill(badge_text_color);
   textAlign(CENTER, CENTER);
   textFont(font_mono);  
   textSize(chapter_text_size);
   text(badge_text,
-      badge_x,
-      badge_y);
-}
+      x_coord_badge,
+      y_coord_badge);
+//}
 // }}}
 
 //// -------------------------------- DRAW LOGO ----
