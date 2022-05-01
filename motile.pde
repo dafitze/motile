@@ -73,6 +73,10 @@ File PATH_IMG = new File(path_img);
 String[] images = PATH_IMG.list(); 
 int rand = (int)random(images.length);
 PImage img = loadImage(path_img+"/"+images[rand]);
+rand = (int)random(images.length);
+PImage img2 = loadImage(path_img+"/"+images[rand]);
+rand = (int)random(images.length);
+PImage img3 = loadImage(path_img+"/"+images[rand]);
 
 File PATH_TITLE = new File(path_title);
 String[] titles = PATH_TITLE.list();
@@ -82,7 +86,14 @@ String title = loadStrings(path_title+"/"+titles[rand])[0];
 File PATH_TEXT = new File(path_text);
 String[] texts = PATH_TEXT.list();
 rand = (int)random(texts.length);
-String text = loadStrings(path_text+"/"+texts[rand])[0];
+String[] text_lines = loadStrings(path_text+"/"+texts[rand]);
+String text_joined = join(text_lines, "\n");
+
+File PATH_TEXT2 = new File(path_text);
+String[] texts2 = PATH_TEXT2.list();
+rand = (int)random(texts2.length);
+String[] text2_lines = loadStrings(path_text+"/"+texts2[rand]);
+String text2_joined = join(text2_lines, "\n");
 
 
 String badge_text = "Neu!";
@@ -99,8 +110,8 @@ String LOCATION = "Bern und Biel";
 // {{{============================================
 
 // fonts
-PFont font_times = createFont("font/TimesNewRoman/times new roman.ttf", 32);
-PFont font_mono = createFont("font/juliamono/JuliaMono-Regular.ttf", 32);
+PFont font_mono = createFont("font/SuisseIntlMono-Regular.ttf", 32);
+PFont font_times = createFont("font/SuisseWorks-Regular.ttf", 32);
 
 // title
 int title_text_size = 115;
@@ -146,7 +157,6 @@ ellipse(142, (height/2) - 427.5, 59, 59);
 // get julia Info
 Table julia_info = loadTable("data/INFO/julia_info.csv", "header");
 
-
 TableRow title_row = julia_info.findRow("title", "element");
 int size_title = title_row.getInt("size");
 int box_title = title_row.getInt("box");
@@ -165,6 +175,15 @@ Float text_width = text_row.getFloat("width");
 Float text_height = text_row.getFloat("height");
 //println("TEXT:     box = ", box_text, " ", " size = ", size_text, " x = ", x_coord_text, " y = ", y_coord_text);
 
+TableRow text2_row = julia_info.findRow("text2", "element");
+int size_text2 = text2_row.getInt("size");
+int box_text2 = text2_row.getInt("box");
+Float x_coord_text2 = text2_row.getFloat("x_coord");
+Float y_coord_text2 = text2_row.getFloat("y_coord");
+Float text2_width = text2_row.getFloat("width");
+Float text2_height = text2_row.getFloat("height");
+//println("TEXT:     box = ", box_text, " ", " size = ", size_text, " x = ", x_coord_text, " y = ", y_coord_text);
+
 
 TableRow img_row = julia_info.findRow("image", "element");
 int size_img = img_row.getInt("size");
@@ -173,6 +192,24 @@ Float x_coord_img = img_row.getFloat("x_coord");
 Float y_coord_img = img_row.getFloat("y_coord");
 Float img_width = img_row.getFloat("width");
 Float img_height = img_row.getFloat("height");
+//println("IMAGE:    box = ", box_img, " ", " size = ", size_img, " x = ", x_coord_img, " y = ", y_coord_img);
+
+TableRow img2_row = julia_info.findRow("image2", "element");
+int size_img2 = img2_row.getInt("size");
+int box_img2 = img2_row.getInt("box");
+Float x_coord_img2 = img2_row.getFloat("x_coord");
+Float y_coord_img2 = img2_row.getFloat("y_coord");
+Float img2_width = img2_row.getFloat("width");
+Float img2_height = img2_row.getFloat("height");
+//println("IMAGE:    box = ", box_img, " ", " size = ", size_img, " x = ", x_coord_img, " y = ", y_coord_img);
+
+TableRow img3_row = julia_info.findRow("image3", "element");
+int size_img3 = img3_row.getInt("size");
+int box_img3 = img3_row.getInt("box");
+Float x_coord_img3 = img3_row.getFloat("x_coord");
+Float y_coord_img3 = img3_row.getFloat("y_coord");
+Float img3_width = img3_row.getFloat("width");
+Float img3_height = img3_row.getFloat("height");
 //println("IMAGE:    box = ", box_img, " ", " size = ", size_img, " x = ", x_coord_img, " y = ", y_coord_img);
 
 TableRow date_row = julia_info.findRow("date", "element");
@@ -226,16 +263,36 @@ if (size_text != 0){
   textFont(font_times);
   textSize(text_text_size);
   textAlign(LEFT, TOP);
-  text(text,
+  text(text_joined,
+  //text("erste zeile \nzweite zeile \ndritte zeile ööö",
       x_coord_text + title_offset,
       y_coord_text + title_offset,
       text_width - 2 * title_offset,
       text_height - 2 * title_offset);
 }
+// Text2
+if (size_text2 != 0){
+  fill(text_color);
+  textFont(font_times);
+  textSize(text_text_size);
+  textAlign(LEFT, TOP);
+  text(text2_joined,
+  //text("erste zeile \nzweite zeile \ndritte zeile ööö",
+      x_coord_text2 + title_offset,
+      y_coord_text2 + title_offset,
+      text2_width - 2 * title_offset,
+      text2_height - 2 * title_offset);
+}
+
 
 // img
 if (size_img != 0){
-  img.resize(round(img_width), 0);
+  if (img.width < img.height){
+    img.resize(round(2 * img_height), 0);
+  } else if (img.width > img.height){
+    img.resize(round(2 * img_width), 0);
+  }
+
   PImage IMG = img.get(
       0,   // x coord
       0,   // y coord
@@ -247,6 +304,47 @@ if (size_img != 0){
       x_coord_img + 2,
       y_coord_img + 2);
 }
+
+// img2
+if (size_img2 != 0){
+  if (img2.width < img2.height){
+    img2.resize(round(2 * img2_height), 0);
+  } else if (img2.width > img2.height){
+    img2.resize(round(2 * img2_width), 0);
+  }
+  PImage IMG2 = img2.get(
+      0,   // x coord
+      0,   // y coord
+      round(img2_width),
+      round(img2_height));
+
+
+  image(IMG2,
+      x_coord_img2 + 2,
+      y_coord_img2 + 2);
+}
+
+// img3
+if (size_img3 != 0){
+  if (img3.width < img3.height){
+    img3.resize(round(2 * img3_height), 0);
+  } else if (img3.width > img3.height){
+    img3.resize(round(2 * img3_width), 0);
+  }
+  PImage IMG3 = img3.get(
+      0,   // x coord
+      0,   // y coord
+      round(img3_width),
+      round(img3_height));
+
+
+  image(IMG3,
+      x_coord_img3 + 2,
+      y_coord_img3 + 2);
+}
+
+
+
 
 if (size_date != 0){
   // chapter date
@@ -288,7 +386,7 @@ if (size_location != 0){
       location_width - 2*title_offset,       // width text box
       location_height - 2*title_offset);     // height text box
 }
-// }}}
+// }}} 
 
 // -------------------------------- DRAW GRID ----
 // {{{============================================
@@ -320,19 +418,19 @@ if (size_title != 0){
     horizontal_length = 2; // width of border
     vertical_length = 1;   // height of border
     vertical_pos = 0;      // is line in center required
-  } else if ((size_title == 2) && (box_title % 2 == 0)){
+  } else if ((size_title == 2) && (box_title % 2 != 0)){
     horizontal_length = 1; // width of border
     vertical_length = 2;   // height of border
     vertical_pos = 1;      // is line in center required
-  } else if ((size_title == 2) && (box_title % 2 != 0)){
+  } else if ((size_title == 2) && (box_title % 2 == 0)){
     horizontal_length = 1;
     vertical_length = 2;
     vertical_pos = 0;
-  } else if ((size_title == 1) && (box_title % 2 == 0)) {
+  } else if ((size_title == 1) && (box_title % 2 != 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 1;
-  } else if ((size_title == 1) && (box_title % 2 != 0)) {
+  } else if ((size_title == 1) && (box_title % 2 == 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 0;
@@ -365,19 +463,19 @@ if (size_text !=0){
     horizontal_length = 2; // width of border
     vertical_length = 1;   // height of border
     vertical_pos = 0;      // is line in center required
-  } else if ((size_text == 2) && (box_text % 2 != 0)){
+  } else if ((size_text == 2) && (box_text % 2 == 0)){
     horizontal_length = 1; // width of border
     vertical_length = 2;   // height of border
     vertical_pos = 1;      // is line in center required
-  } else if ((size_text == 2) && (box_text % 2 == 0)){
+  } else if ((size_text == 2) && (box_text % 2 != 0)){
     horizontal_length = 1;
     vertical_length = 2;
     vertical_pos = 0;
-  } else if ((size_text == 1) && (box_text % 2 != 0)) {
+  } else if ((size_text == 1) && (box_text % 2 == 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 1;
-  } else if ((size_text == 1) && (box_text % 2 == 0)) {
+  } else if ((size_text == 1) && (box_text % 2 != 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 0;
@@ -411,19 +509,19 @@ if (size_img != 0){
     horizontal_length = 2; // width of border
     vertical_length = 1;   // height of border
     vertical_pos = 0;      // is line in center required
-  } else if ((size_img == 2) && (box_img % 2 != 0)){
+  } else if ((size_img == 2) && (box_img % 2 == 0)){
     horizontal_length = 1; // width of border
     vertical_length = 2;   // height of border
     vertical_pos = 1;      // is line in center required
-  } else if ((size_img == 2) && (box_img % 2 == 0)){
+  } else if ((size_img == 2) && (box_img % 2 != 0)){
     horizontal_length = 1;
     vertical_length = 2;
     vertical_pos = 0;
-  } else if ((size_img == 1) && (box_img % 2 != 0)) {
+  } else if ((size_img == 1) && (box_img % 2 == 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 1;
-  } else if ((size_img == 1) && (box_img % 2 == 0)) {
+  } else if ((size_img == 1) && (box_img % 2 != 0)) {
     horizontal_length = 1;
     vertical_length = 1;
     vertical_pos = 0;
