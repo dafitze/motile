@@ -1,9 +1,6 @@
 #!/bin/bash
-# cd /Users/danielfitze/CODE/ristretti/motile/sketches/flyer
 
-
-paths=( "/Users/danielfitze/ristretti/GIT/motile/data/motile/1_Admin" "/Users/danielfitze/ristretti/GIT/motile/data/motile/2_Recherche" "/Users/danielfitze/ristretti/GIT/motile/data/motile/3_Erscheinungsbild"
-"/Users/danielfitze/ristretti/GIT/motile/data/motile/4_Präsentationen" )
+paths=( "path/chapter/1" "path/chapter/2" "path/chapter/3" "path/chapter/4" )
 
 nb_docs=100
 nb_chapter=1

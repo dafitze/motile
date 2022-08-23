@@ -1,48 +1,3 @@
-// TODO:
-// {{{
-// - Motile DataBase
-//  - choose kind of database
-//  - choose interaction
-// - Poster:
-//  - titel zu oberst, nimmt so viel platz wie nötig. 
-//  - versch. sätze von 7er
-//  - schritt 1: teil darunter wird durch badge (passt sich in grösse an) ausgefüllt
-//  - schritt 2: es gibt mehrere elemente mit hierarchie, rest wird mit badge gefüllt
-//  - was wenn rest (nicht) zusammenhängend ist
-//  => Wenn das zeug läuft beim flyer einbauen
-//
-// - 19.10 Sitzung
-// ------------------------------------------------------<F5>
-// - input besprechen
-//  - 12 boxen sind verfügbar
-//  - grösse der elemente sollte mit anzahl der elemente zusammenhängen
-//  - wenn mehrere gleiche elemente, wie viele wollen wir erlauben?
-// - 12 farben RGB codes?
-//  - jedes projekt hat seine farbe
-//  - rgb werte von eva
-// - strucktur rückseite
-//  - auf rückseite? logo von migros kultur% wie button irgendwo
-// - (jetzt ignorieren) bei generiertem flyer einzelne elemente verändern
-//  - alle relevanten variablen in file speichern
-//  - neuer flyer nach diesem Rezept machen
-//
-// - 04.10 Sitzung
-// ------------------------------------------------------<F5>
-// - poster skript mit neuen sachen ausprobieren
-//  - welche elemente will man
-//    - wie viele boxen sind besetzt
-//  - titel im zuoberst nur vertikal und nach unten so viele boxen wie es braucht
-//  - motile script logo asci font in processing
-//
-//
-// - W43 Sitzung 24. Oktober Sonntag alle todos erledigt
-// ------------------------------------------------------<F5>
-// - evt ausserhalb von processing
-// - bild seiten verhältnis muss stimmen = nicht verziehen
-// - ausschnitt zufällig wählen (z.B 3 optionen [links,mitte,rechts]
-// - gleiches elemente mehrmals (nur Bilder und einen titel)
-// }}} 
-
 import processing.pdf.*;
 size(1748, 2480, PDF, "test.pdf");
 
@@ -242,7 +197,7 @@ if (size_title != 0){
   textSize(chapter_text_size);
   textAlign(LEFT, TOP);
   fill(chapter_color);
-  text("Recherche",
+  text("Präsentation",
       x_coord_title + title_offset,    // x text start
       y_coord_title + title_offset,    // y text start
       box_width - 2*title_offset,           // width text box

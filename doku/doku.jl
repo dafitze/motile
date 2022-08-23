@@ -1,5 +1,4 @@
 PATH_CHAPTER = ARGS[1]
-#PATH_CHAPTER = "/Users/danielfitze/ristretti/GIT/motile/data/motile/1_Admin"
 println("=========>",PATH_CHAPTER)
 #println("=========>",path_chapter)
 using RandLayout
@@ -11,7 +10,7 @@ SetUp = setup(width = 1748,
               nrow = 6,
               grid_numbers = 1,
               grid_lines = 1,
-              path_save_info =  "/Users/danielfitze/ristretti/GIT/motile/data/INFO",
+              path_save_info = "path/to/output",
               path_img = PATH_CHAPTER*"/Bild",
               path_title = PATH_CHAPTER*"/Titel",
               path_text = PATH_CHAPTER*"/Text",
